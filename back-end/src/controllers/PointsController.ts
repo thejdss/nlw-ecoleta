@@ -38,7 +38,6 @@ class PointsController {
     }
 
     async create (req: Request, res: Response) {
-        console.log(req.body);
         const {
             name,
             email,
