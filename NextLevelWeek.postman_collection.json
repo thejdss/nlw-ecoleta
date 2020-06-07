@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "ad6ef9de-8cd2-4a09-addb-bfab41b1f493",
+		"name": "NextLevelWeek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{dev_host}}/items",
+					"host": [
+						"{{dev_host}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Ponto de Coleta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\" : \"Supermercados BH\",\r\n    \"email\" : \"top@top.com\",\r\n    \"whatsapp\" : \"(31) 32323232\",\r\n    \"latitude\" : -46.13546,\r\n    \"longitude\" : -32.123165,\r\n    \"city\" : \"Belo Horizonte\",\r\n    \"uf\" : \"MG\",\r\n    \"items\" : [\r\n    \t1,\r\n    \t2,\r\n    \t6\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_host}}/points",
+					"host": [
+						"{{dev_host}}"
+					],
+					"path": [
+						"points"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Param Ponto de Coleta",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{dev_host}}/points/:id",
+					"host": [
+						"{{dev_host}}"
+					],
+					"path": [
+						"points",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Query Ponto de Coleta",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{dev_host}}/points?city=Belo Horizonte&uf=MG&items=2",
+					"host": [
+						"{{dev_host}}"
+					],
+					"path": [
+						"points"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Belo Horizonte"
+						},
+						{
+							"key": "uf",
+							"value": "MG"
+						},
+						{
+							"key": "items",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

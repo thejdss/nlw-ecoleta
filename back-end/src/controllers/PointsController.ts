@@ -10,7 +10,7 @@ class PointsController {
         .map(item => Number(item.trim()));
 
         const points = await knex("points")
-        .join("point_items", "point.id", "=", "point_items.point.id")
+        .join("point_items", "points.id", "=", "point_items.point_id")
         .whereIn("point_items.item_id", parsedItems)
         .where("city", String(city))
         .where("uf", String(uf))
@@ -21,18 +21,18 @@ class PointsController {
     }
 
     async show(req: Request, res: Response) {
-        const { id } = req.params;
+        const id = req.params.id;
 
         const point = await knex("points").where("id", id).first();
 
         if(!point) {
-            return res.status(400).json("Point not found")
+            return res.status(400).json({message: "Not found"})
         }
 
         const items = await knex("items")
-        .join("point_items", "items.id", "=", "points_items.item_id")
-        .where("point_items.point.id")
-        .select("items.title");
+            .join("point_items", "items.id", "=", "point_items.item_id")
+            .where("point_items.point_id", id)
+            .select("items.title");
 
         return res.json({point, items});
     }
@@ -62,16 +62,7 @@ class PointsController {
             uf
         }
         
-        const insertedIds = await trx("points").insert({
-            image: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-            name,
-            email,
-            whatsapp,
-            latitude,
-            longitude,
-            city,
-            uf
-        })
+        const insertedIds = await trx("points").insert(point)
     
         const point_id = insertedIds[0];
     
